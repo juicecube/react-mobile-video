@@ -26,6 +26,7 @@ interface NoFullscreenControlsProps {
   currentTime:number;
   duration:number;
   isFullScreen:boolean;
+  showFullScreen:boolean;
   dispatch:any;
   operation:{
     setVolume:(value:number) => void;
@@ -37,7 +38,7 @@ interface NoFullscreenControlsProps {
 }
 
 export const NoFullscreenControls:React.FC<NoFullscreenControlsProps> = (props) => {
-  const { videoState, currentTime, duration, dispatch, isFullScreen, operation, progressColor, progressBackColor, thumb, timeStyle, fullScreenBtn } = props;
+  const { videoState, currentTime, duration, dispatch, isFullScreen, operation, progressColor, progressBackColor, thumb, timeStyle, fullScreenBtn, showFullScreen } = props;
   const [percent, setPercent] = useState<number>(0);
   const [volumePercent, setVolumePercent] = useState<number>(100);
   const [visibleVolumeControl, setVisibleVolumeControl] = useState<boolean>(false);
@@ -115,6 +116,28 @@ export const NoFullscreenControls:React.FC<NoFullscreenControlsProps> = (props) 
     setVisibleVolumeControl((prev) => !prev);
   };
 
+  const renderFullBtn = () => {
+    if (!showFullScreen) return null;
+
+    return isFullScreen ? (
+      <div
+        styleName="fullscreenBtn"
+        id='quitFullscreenBtn'
+        // style={quitFullscreenStyle}
+        onClick={operation.handleFullScreen} >
+          <img src={fullScreenBtn ?? Icon.quitFullscreen} alt=""/>
+        </div>
+    ) : (
+      <div
+        styleName="fullscreenBtn"
+        id='entryFullscreenBtn'
+        // style={entryFullscreenStyle}
+        onClick={operation.handleFullScreen} >
+          <img src={fullScreenBtn ?? Icon.entryFullscreen} alt=""/>
+        </div>
+    )
+  }
+
   // const entryFullscreenStyle = {
   //   // width: '32px',
   //   // height: '32px',
@@ -164,8 +187,9 @@ export const NoFullscreenControls:React.FC<NoFullscreenControlsProps> = (props) 
   return (
     <div
       styleName="no-full-screen-container"
+      id='no-full-screen-container'
     >
-      <div styleName="play-pause" onClick={()=>{
+      <div id='play-pause' styleName="play-pause" onClick={()=>{
         operation.handleTogglePlay();
       }}>
         <img src={showplay?Icon.playCtrl:Icon.pauseCtrl} alt=''/>
@@ -247,21 +271,7 @@ export const NoFullscreenControls:React.FC<NoFullscreenControlsProps> = (props) 
 
         )}
       </div>
-      {isFullScreen ? (
-        <div
-          styleName="fullscreenBtn"
-          // style={quitFullscreenStyle}
-          onClick={operation.handleFullScreen} >
-            <img src={fullScreenBtn ?? Icon.quitFullscreen} alt=""/>
-          </div>
-      ) : (
-        <div
-          styleName="fullscreenBtn"
-          // style={entryFullscreenStyle}
-          onClick={operation.handleFullScreen} >
-            <img src={fullScreenBtn ?? Icon.entryFullscreen} alt=""/>
-          </div>
-      )}
+      {renderFullBtn()}
     </div>
   );
 };

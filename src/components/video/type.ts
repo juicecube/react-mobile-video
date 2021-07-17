@@ -27,6 +27,7 @@ export interface VideoczProps {
   showCenterBtn?:boolean;
   showController?:boolean;
   showBottomProgress?:boolean;
+  showFullScreen?:boolean;
   videoRef?:MutableRefObject<HTMLVideoElement|null>;
   muted?:boolean;
   loop?:boolean;

@@ -45,7 +45,7 @@ const Videocz:React.FC<VideoczProps> = (props:VideoczProps) => {
     width, height, src, poster ,preload="auto",autoPlay = false, muted = false, loop=false, progressColor, progressBackColor, thumb, timeStyle, fullScreenBtn, pauseBtn, playBtn, loading,
     onAbort, onCanplay, onCanPlaythrough, onDurationchange, onEmptied, onEnded, onError, onLoadedmetadata,
     onLoadstart, onPause, onPlay, onPlaying, onProgress, onRateChange, onSeeked, onSeeking,
-    onStalled, onSuspend, onTimeupdate, onVolumechange, onWaiting,showCenterBtn = true,showController = true,showBottomProgress = true,videoRef : Ref
+    onStalled, onSuspend, onTimeupdate, onVolumechange, onWaiting, showFullScreen = true,showCenterBtn = true,showController = true,showBottomProgress = true,videoRef : Ref
   } = props;
 
   useEffect(() => {
@@ -324,6 +324,7 @@ const Videocz:React.FC<VideoczProps> = (props:VideoczProps) => {
               duration={state.duration}
               operation={operation}
               isFullScreen={state.fullScreen}
+              showFullScreen={showFullScreen}
               dispatch={dispatch} />
           </div>
         )}

@@ -19,7 +19,7 @@ export default function App() {
   
   return (
     <div className="App">
-      <Videocz videoRef={ref} src="" />
+      <Videocz showFullScreen={false} src='https://online-education.codemao.cn/444/162142647511721.mp4' videoRef={ref} />
     </div>
   );
 }

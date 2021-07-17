@@ -64,6 +64,7 @@ loop?:boolean;
 showCenterBtn?:boolean;
 showController?:boolean;
 showBottomProgress?:boolean;
+showFullScreen?:boolean; // 是否显示全屏按钮
 
 videoRef?:MutableRefObject<HTMLVideoElement>;     //获取video dom实例
 
